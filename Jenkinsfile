@@ -18,7 +18,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                powershell 'playwright test test_main_page.py'
+                powershell(returnStdout: true, script: '''
+                    & .\\venv\\Scripts\\Activate.ps1  # Активируем окружение
+                    playwright test test_main_page.py
+                ''')
             }
         }
     }
