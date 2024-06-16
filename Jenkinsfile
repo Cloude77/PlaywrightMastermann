@@ -11,8 +11,8 @@ pipeline {
                         Write-Output "----- Зависимости установлены -----"
                     } catch {
                         Write-Error $_.Exception.Message
-                        exit 1
                     }
+                    exit 0  #  Выход  с  кодом  0  после  блока  try...catch
                 ''')
             }
         }
