@@ -14,10 +14,18 @@ pipeline {
                         Write-Error $_.Exception.Message
                     }
                     Write-Output "----- Конец powershell -----"
-                    exit 0  #  Выход с кодом 0 после блока try...catch
+                    New-Item -Path . -Name test_success.txt -Value "Тесты прошли успешно!" -Force
+                    exit 0  # Выход с кодом 0 после блока try...catch
                 '''
             }
         }
-        // … остальной  код
+        stage('Test') {
+            steps {
+                powershell '''
+                    & .\\venv\\Scripts\\Activate.ps1
+                    playwright test test_main_page.py
+                '''
+            }
+        }
     }
 }
