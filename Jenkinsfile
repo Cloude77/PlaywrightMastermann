@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'ubuntu-agent' // Замени на имя/метку твоего Ubuntu агента
+    }
     stages {
         stage('Install Dependencies') {
             steps {
