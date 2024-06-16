@@ -5,8 +5,10 @@ pipeline {
             steps {
                 powershell(returnStdout: true, script: '''
                     try {
+                        Write-Output "----- Начало установки зависимостей -----"
                         & .\\venv\\Scripts\\Activate.ps1
                         pip install -r requirements.txt
+                        Write-Output "----- Зависимости установлены -----"
                     } catch {
                         Write-Error $_.Exception.Message
                         exit 1
