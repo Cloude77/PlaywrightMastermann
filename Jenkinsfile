@@ -23,8 +23,14 @@ pipeline {
             steps {
                 powershell '''
                     & .\\venv\\Scripts\\Activate.ps1
-                    playwright test test_main_page.py
-                    echo "Тесты завершены!" > test_completed.txt
+                    try {
+                        playwright test test_main_page.py
+                        echo "Тесты завершены успешно!" > test_completed.txt
+                    } catch {
+                        Write-Error $_.Exception.Message
+                        echo "Тесты завершены с ошибкой!" > test_completed.txt
+                        exit 1 # Завершаем этап с ошибкой
+                    }
                 '''
             }
         }
