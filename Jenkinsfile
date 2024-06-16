@@ -14,7 +14,7 @@ pipeline {
                         Write-Error $_.Exception.Message
                     }
                     Write-Output "----- Конец powershell -----"
-                    New-Item -Path . -Name test_success.txt -Value "Тесты прошли успешно!" -Force
+                    echo "Тесты прошли успешно!" > test_success.txt
                     exit 0  # Выход с кодом 0 после блока try...catch
                 '''
             }
@@ -24,6 +24,7 @@ pipeline {
                 powershell '''
                     & .\\venv\\Scripts\\Activate.ps1
                     playwright test test_main_page.py
+                    echo "Тесты завершены!" > test_completed.txt
                 '''
             }
         }
