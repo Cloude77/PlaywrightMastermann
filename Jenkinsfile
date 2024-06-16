@@ -1,12 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Setup') {
-            steps {
-                git 'https://github.com/Cloude77/PlaywrightMastermann.git'
-            }
-        }
-        stage('Setup') {
+        stage('Install Dependencies') {  //  Изменили название этапа
             steps {
                 // Указываем путь к виртуальному окружению
                 powershell '''
