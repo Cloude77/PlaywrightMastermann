@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Setup') {
             steps {
                 git 'https://github.com/Cloude77/PlaywrightMastermann.git'
             }
