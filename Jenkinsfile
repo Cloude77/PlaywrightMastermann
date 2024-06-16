@@ -4,10 +4,10 @@ pipeline {
         stage('Install Dependencies') {  //  Изменили название этапа
             steps {
                 // Указываем путь к виртуальному окружению
-                powershell '''
-                    & .\\venv\\Scripts\\Activate.ps1
+                powershell(returnStdout: true, script: '''
+                    & .\\venv\\Scripts\\Activate.ps1 -NonInteractive
                     pip install -r requirements.txt
-                '''
+                ''')
             }
         }
         stage('Test') {
