@@ -1,24 +1,18 @@
 pipeline {
-    agent {
-        label 'ubuntu-agent' // Замени на имя/метку твоего Ubuntu агента
-    }
+    agent any
     stages {
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    #!/bin/bash
-                    set -e
-                    source venv/bin/activate
+                powershell '''
+                    & .\\venv\\Scripts\\Activate.ps1
                     pip install -r requirements.txt
                 '''
             }
         }
         stage('Test') {
             steps {
-                sh '''
-                    #!/bin/bash
-                    set -e
-                    source venv/bin/activate
+                powershell '''
+                    & .\\venv\\Scripts\\Activate.ps1
                     playwright test test_main_page.py
                 '''
             }
